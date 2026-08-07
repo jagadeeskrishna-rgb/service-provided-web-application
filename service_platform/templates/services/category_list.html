@@ -1,0 +1,5 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3"><h1>Service Categories</h1><form><input class="form-control" name="q" value="{{ query }}" placeholder="Search services"></form></div>
+<div class="row g-3">{% for category in categories %}<div class="col-md-4"><div class="service-card p-3 h-100"><h2>{{ category.name }}</h2><p>{{ category.description }}</p><p class="fw-semibold">Base price: Rs. {{ category.base_price }}</p><p class="text-muted mb-0">Available providers: {{ category.provider_total }}</p></div></div>{% empty %}<p>No services found.</p>{% endfor %}</div>
+{% endblock %}

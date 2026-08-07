@@ -1,0 +1,5 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>All Customers</h1>
+<div class="table-responsive"><table class="table service-table"><thead><tr><th>Username</th><th>Name</th><th>Email</th><th>Phone</th><th>Bookings</th><th>Reviews</th><th>Tickets</th></tr></thead><tbody>{% for customer in customers %}<tr><td>{{ customer.username }}</td><td>{{ customer.get_full_name|default:'-' }}</td><td>{{ customer.email|default:'-' }}</td><td>{{ customer.phone|default:'-' }}</td><td>{{ customer.customer_bookings.count }}</td><td>{{ customer.reviews_given.count }}</td><td>{{ customer.support_tickets.count }}</td></tr>{% empty %}<tr><td colspan="7">No customers found.</td></tr>{% endfor %}</tbody></table></div>
+{% endblock %}

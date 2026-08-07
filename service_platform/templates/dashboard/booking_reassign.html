@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Reassign Booking #{{ booking.id }}</h1>
+<div class="form-card">
+    <p><strong>Service:</strong> {{ booking.category.name }}</p>
+    <p><strong>Current provider:</strong> {{ booking.provider|default:'Not assigned' }}</p>
+    <form method="post">{% csrf_token %}{{ form.as_p }}<button class="btn btn-service">Reassign</button> <a class="btn btn-service-outline" href="{% url 'admin_booking_list' %}">Cancel</a></form>
+</div>
+{% endblock %}

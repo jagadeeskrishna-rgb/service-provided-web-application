@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Booking #{{ booking.id }}</h1>
+<dl class="row"><dt class="col-sm-3">Service</dt><dd class="col-sm-9">{{ booking.category.name }}</dd><dt class="col-sm-3">Status</dt><dd class="col-sm-9">{{ booking.get_status_display }}</dd><dt class="col-sm-3">Address</dt><dd class="col-sm-9">{{ booking.service_address }}</dd><dt class="col-sm-3">Problem</dt><dd class="col-sm-9">{{ booking.problem_description }}</dd></dl>
+{% if booking.provider_notes %}<p><strong>Provider notes:</strong> {{ booking.provider_notes }}</p>{% endif %}
+{% if booking.completion_photo %}<p><strong>Completion photo:</strong> <a href="{{ booking.completion_photo.url }}">View uploaded photo</a></p>{% endif %}
+{% if booking.cancellation_photo %}<p><strong>Cancellation photo:</strong> <a href="{{ booking.cancellation_photo.url }}">View uploaded photo</a></p>{% endif %}
+{% if booking.status == 'pending' or booking.status == 'accepted' %}<a class="btn btn-outline-danger" href="{% url 'booking_cancel' booking.id %}">Cancel Booking</a>{% endif %}
+{% if booking.status == 'completed' and user == booking.customer %}<a class="btn btn-primary" href="{% url 'review_create' booking.id %}">Add Review</a>{% endif %}
+{% if user == booking.customer %}<a class="btn btn-service-outline" href="{% url 'ticket_create' %}">Raise Support Ticket</a>{% endif %}
+{% endblock %}

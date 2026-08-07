@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Remove Service Type</h1>
+<div class="form-card">
+    <p>Are you sure you want to remove <strong>{{ category.name }}</strong>?</p>
+    {% if provider_count or booking_count %}
+        <div class="alert alert-warning">This service type has {{ provider_count }} provider(s) and {{ booking_count }} booking(s). It will be removed from the active customer list to preserve existing records.</div>
+    {% endif %}
+    <form method="post">{% csrf_token %}<button class="btn btn-danger">Remove</button> <a class="btn btn-service-outline" href="{% url 'service_type_manage' %}">Cancel</a></form>
+</div>
+{% endblock %}

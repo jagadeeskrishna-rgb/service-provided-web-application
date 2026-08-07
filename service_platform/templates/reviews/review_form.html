@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Submit Feedback</h1>
+<div class="alert alert-warning">Feedback is required for this completed booking. One feedback entry is allowed for each booking.</div>
+<form method="post" class="form-card">{% csrf_token %}{{ form.as_p }}<button class="btn btn-service">Submit Review</button></form>
+{% endblock %}

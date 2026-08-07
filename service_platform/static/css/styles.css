@@ -1,0 +1,20 @@
+body { background: #f7f3ec; color: #24342f; }
+.service-navbar { background: #11685f; border-bottom: 4px solid #f2a516; }
+.service-navbar .navbar-brand, .service-navbar .nav-link { color: #fffaf0; }
+.service-navbar .nav-link:hover { color: #ffd27a; }
+.hero { background: linear-gradient(135deg, #fffaf0, #e5f5f1); border: 1px solid #d8c7a5; border-radius: 8px; }
+.card, .form-card, .service-card { background: #ffffff; border: 1px solid #d8c7a5; border-radius: 8px; box-shadow: 0 8px 18px rgba(33, 48, 43, 0.08); }
+.service-card { border-top: 4px solid #f2a516; }
+.form-card { max-width: 720px; padding: 1.25rem; }
+h1 { color: #0f4f49; font-weight: 700; }
+h2 { color: #9a5f00; font-size: 1.25rem; }
+h3 { color: #11685f; font-size: 1.05rem; }
+.section-kicker { color: #9a5f00; font-weight: 700; margin-bottom: .25rem; text-transform: uppercase; letter-spacing: .04em; }
+.btn-service { background: #f2a516; border-color: #f2a516; color: #1f2d29; font-weight: 600; }
+.btn-service:hover { background: #d88f08; border-color: #d88f08; color: #1f2d29; }
+.btn-service-outline { border-color: #11685f; color: #11685f; background: #fffaf0; font-weight: 600; }
+.btn-service-outline:hover { background: #11685f; color: #fffaf0; }
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; }
+.stat { background: #fff; border: 1px solid #d8c7a5; border-radius: 8px; padding: 1rem; border-top: 4px solid #11685f; }
+.stat strong { display: block; font-size: 1.75rem; color: #11685f; }
+.service-table thead { background: #e5f5f1; }

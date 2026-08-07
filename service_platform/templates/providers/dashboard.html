@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3"><h1>Provider Dashboard</h1><a class="btn btn-outline-primary" href="{% url 'provider_profile' %}">Profile</a></div>
+{% if not profile %}<div class="alert alert-warning">Complete your provider profile to view matching jobs.</div>{% endif %}
+{% if profile and profile.approval_status == 'pending' %}<div class="alert alert-info">Your provider signup request is waiting for admin approval. You can update your profile, but you cannot accept jobs yet.</div>{% endif %}
+{% if profile and profile.approval_status == 'blocked' %}<div class="alert alert-danger">Your provider account is blocked by admin. Contact admin for support.</div>{% endif %}
+{% if profile %}<p><strong>Services:</strong> {% for category in profile.categories.all %}<span class="badge text-bg-light">{{ category.name }}</span> {% empty %}No services selected{% endfor %}</p>{% endif %}
+<h2>Available Matching Bookings</h2>
+<div class="table-responsive"><table class="table"><tbody>{% for booking in pending %}<tr><td>{{ booking.category.name }}</td><td>{{ booking.preferred_date }}</td><td>{{ booking.service_address }}</td><td><a class="btn btn-sm btn-primary" href="{% url 'accept_booking' booking.id %}">Accept</a></td></tr>{% empty %}<tr><td>No pending matching jobs.</td></tr>{% endfor %}</tbody></table></div>
+<h2>My Jobs</h2>
+<div class="table-responsive"><table class="table table-striped"><tbody>{% for booking in bookings %}<tr><td>{{ booking.category.name }}</td><td>{{ booking.customer.username }}</td><td>{{ booking.get_status_display }}</td><td><a href="{% url 'booking_status_update' booking.id %}">Update</a></td></tr>{% empty %}<tr><td>No assigned jobs.</td></tr>{% endfor %}</tbody></table></div>
+{% endblock %}

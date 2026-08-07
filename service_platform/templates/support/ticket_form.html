@@ -1,0 +1,5 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Raise Support Ticket</h1>
+<form method="post" class="form-card">{% csrf_token %}{{ form.as_p }}<button class="btn btn-service">Submit Ticket</button> <a class="btn btn-service-outline" href="{% url 'customer_ticket_list' %}">Cancel</a></form>
+{% endblock %}

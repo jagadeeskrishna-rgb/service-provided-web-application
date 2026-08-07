@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3"><h1>Admin Dashboard</h1><div><a class="btn btn-service" href="{% url 'service_type_manage' %}">Manage Service Types</a> <a class="btn btn-service-outline" href="{% url 'admin_ticket_list' %}">Support Tickets</a></div></div>
+<div class="stats-grid mb-4">
+    <a class="stat text-decoration-none" href="{% url 'admin_customer_list' %}">Customers <strong>{{ customer_count }}</strong></a>
+    <a class="stat text-decoration-none" href="{% url 'admin_provider_list' %}">Providers <strong>{{ provider_count }}</strong><small>{{ pending_provider_count }} pending, {{ blocked_provider_count }} blocked</small></a>
+    <div class="stat">Categories <strong>{{ category_count }}</strong></div>
+    <a class="stat text-decoration-none" href="{% url 'admin_booking_list' %}">Bookings <strong>{{ booking_count }}</strong></a>
+    <a class="stat text-decoration-none" href="{% url 'admin_review_list' %}">Reviews <strong>{{ review_count }}</strong></a>
+    <a class="stat text-decoration-none" href="{% url 'admin_ticket_list' %}">Support Tickets <strong>{{ support_ticket_count }}</strong><small>{{ open_ticket_count }} open</small></a>
+</div>
+<h2>Service Type Capacity</h2>
+<div class="row g-3 mb-4">{% for service in service_types %}<div class="col-md-4"><div class="service-card p-3 h-100"><h3>{{ service.name }}</h3><p class="mb-1">Providers available: <strong>{{ service.provider_total }}</strong></p><p class="mb-0">Status: {% if service.is_active %}Active{% else %}Removed from customer list{% endif %}</p></div></div>{% endfor %}</div>
+<h2>Recent Bookings</h2>
+<table class="table table-striped"><thead><tr><th>ID</th><th>Customer</th><th>Service</th><th>Status</th></tr></thead><tbody>{% for booking in recent_bookings %}<tr><td>{{ booking.id }}</td><td>{{ booking.customer.username }}</td><td>{{ booking.category.name }}</td><td>{{ booking.get_status_display }}</td></tr>{% endfor %}</tbody></table>
+<h2>Recent Support Tickets</h2>
+<table class="table service-table"><thead><tr><th>ID</th><th>Customer</th><th>Subject</th><th>Status</th><th></th></tr></thead><tbody>{% for ticket in recent_tickets %}<tr><td>{{ ticket.id }}</td><td>{{ ticket.customer.username }}</td><td>{{ ticket.subject }}</td><td>{{ ticket.get_status_display }}</td><td><a href="{% url 'ticket_resolve' ticket.id %}">Resolve</a></td></tr>{% empty %}<tr><td colspan="5">No tickets yet.</td></tr>{% endfor %}</tbody></table>
+{% endblock %}

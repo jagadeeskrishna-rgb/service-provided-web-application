@@ -1,0 +1,5 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Customer Support Tickets</h1>
+<div class="table-responsive"><table class="table service-table"><thead><tr><th>ID</th><th>Customer</th><th>Booking</th><th>Subject</th><th>Status</th><th>Response</th><th></th></tr></thead><tbody>{% for ticket in tickets %}<tr><td>{{ ticket.id }}</td><td>{{ ticket.customer.username }}</td><td>{{ ticket.booking|default:'General' }}</td><td>{{ ticket.subject }}</td><td>{{ ticket.get_status_display }}</td><td>{{ ticket.admin_response|default:'-' }}</td><td><a class="btn btn-sm btn-service-outline" href="{% url 'ticket_resolve' ticket.id %}">Resolve</a></td></tr>{% empty %}<tr><td colspan="7">No support tickets found.</td></tr>{% endfor %}</tbody></table></div>
+{% endblock %}

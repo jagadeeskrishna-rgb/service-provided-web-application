@@ -1,0 +1,5 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>All Providers</h1>
+<div class="table-responsive"><table class="table service-table"><thead><tr><th>Provider</th><th>Services</th><th>Area</th><th>Status</th><th>Available</th><th>Actions</th></tr></thead><tbody>{% for provider in providers %}<tr><td>{{ provider.user.username }}<br><span class="text-muted">{{ provider.user.email|default:'-' }}</span></td><td>{% for category in provider.categories.all %}<span class="badge text-bg-light">{{ category.name }}</span> {% empty %}No services selected{% endfor %}</td><td>{{ provider.service_area }}</td><td>{{ provider.get_approval_status_display }}</td><td>{{ provider.is_available }}</td><td>{% if provider.approval_status != 'approved' %}<a class="btn btn-sm btn-service" href="{% url 'provider_approve' provider.id %}">Approve</a>{% endif %} {% if provider.approval_status != 'blocked' %}<a class="btn btn-sm btn-outline-danger" href="{% url 'provider_block' provider.id %}">Block</a>{% endif %}</td></tr>{% empty %}<tr><td colspan="6">No providers found.</td></tr>{% endfor %}</tbody></table></div>
+{% endblock %}

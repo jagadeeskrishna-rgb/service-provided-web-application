@@ -1,0 +1,5 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Update Status</h1>
+<form method="post" enctype="multipart/form-data" class="form-card">{% csrf_token %}{{ form.as_p }}<button class="btn btn-service">Save</button></form>
+{% endblock %}

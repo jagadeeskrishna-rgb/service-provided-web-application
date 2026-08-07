@@ -1,0 +1,5 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3"><h1>Customer Dashboard</h1><div><a class="btn btn-service" href="{% url 'booking_create' %}">New Booking</a> <a class="btn btn-service-outline" href="{% url 'ticket_create' %}">Raise Support Ticket</a></div></div>
+<div class="table-responsive"><table class="table table-striped"><thead><tr><th>Service</th><th>Date</th><th>Provider</th><th>Status</th><th></th></tr></thead><tbody>{% for booking in bookings %}<tr><td>{{ booking.category.name }}</td><td>{{ booking.preferred_date }}</td><td>{{ booking.provider|default:'Not assigned' }}</td><td><span class="badge text-bg-secondary">{{ booking.get_status_display }}</span></td><td><a href="{% url 'booking_detail' booking.id %}">View</a></td></tr>{% empty %}<tr><td colspan="5">No bookings yet.</td></tr>{% endfor %}</tbody></table></div>
+{% endblock %}
